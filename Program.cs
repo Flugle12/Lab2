@@ -63,6 +63,75 @@ public class extendNine : nine // Дочерний класс
     }
 
 }
+
+class Point
+{
+    public double _x, _y;
+    public double _length;
+
+    public Point(double x, double y)
+    {
+        _x = x;
+        _y = y;
+    }
+
+    public double GetLength()
+    {
+        return _length = Math.Sqrt(_x * _x + _y * _y);
+    }
+
+    // Унарная операция: уменьшить координаты x и y на 1
+    public static Point operator --(Point p)
+    {
+        p._x -= 1;
+        p._y -= 1;
+        return p;
+    }
+
+    // Унарная операция: поменять координаты x и y местами
+    public static Point operator -(Point p)
+    {
+        double temp = p._x;
+        p._x = p._y;
+        p._y = temp;
+        return p;
+    }
+
+    // Приведение типа: неявное к int (целая часть координаты x)
+    public static implicit operator int(Point p) => (int)p._x;
+
+    // Приведение типа: явное к double (координата y)
+    public static explicit operator double(Point p) => p._y;
+
+    // Бинарная операция: Point p - целое число (уменьшается координата x)
+    public static Point operator -(Point p, int value)
+    {
+        p._x -= value;
+        return p;
+    }
+
+    // Бинарная операция: целое число - Point p (уменьшается координата y)
+    public static Point operator -(int value, Point p)
+    {
+        p._y -= value;
+        return p;
+    }
+
+    // Бинарная операция: Point p1 - Point p2 (вычисляет разность)
+    public static Point operator -(Point p1, Point p2)
+    {
+        return new Point(p1._x - p2._x, p1._y - p2._y);
+    }
+
+    // Метод для вычисления расстояния до другой точки
+    public double DistanceTo(Point p)
+    {
+        double dx = _x - p._x;
+        double dy = _y - p._y;
+        return Math.Sqrt(dx * dx + dy * dy);
+    }
+}
+
 public class Program
 {
     public static void Main(string[] args)
