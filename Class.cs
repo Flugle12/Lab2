@@ -55,7 +55,7 @@ class Point
     // Перегрузка ToString()
     public override string ToString()
     {
-        return $"Point({X}, {Y})";
+        return $"Point {X}, {Y}";
     }
 
     // Унарная операция: уменьшить координаты x и y на 1
